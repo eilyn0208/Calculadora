@@ -1,6 +1,6 @@
 let fullOp = '';
 let historial = [];
-let isResult = false; // Flag para saber si lo que hay en pantalla es un resultado final
+let isResult = false; // sirve para saber si lo que hay en pantalla es un resultado final
 const operators = ['+', '-', '*', '/', '^'];
 
 const screen = () => document.getElementById('screen');
@@ -9,12 +9,12 @@ const operacion = () => document.getElementById('operacion');
 const toDisplay = (str) => str.replace(/\*/g, '×').replace(/\//g, '÷');
 
 const handleClick = (value) => {
-    // Si hay un resultado previo y el usuario presiona un número o punto, limpia para empezar de nuevo
+    // si hay un resultado y el usuario presiona algo limpia para empezar again
     if (isResult && !operators.includes(value)) {
         fullOp = '';
         isResult = false;
     } else if (isResult && operators.includes(value)) {
-        // Si hay resultado pero presiona un operador, permite seguir operando con el resultado anterior
+        // si hay un resultado pero presiona un operador permite seguir operando con el resultado anterior
         isResult = false;
     }
 
@@ -33,17 +33,17 @@ const handleClick = (value) => {
     }
 
     if (operators.includes(value)) {
-        // Caso: Signo negativo al inicio
+        // signo negativo al inicio
         if (fullOp === '' && value === '-') {
             fullOp = '-';
             screen().textContent = '-';
             return;
         }
         
-        // No permitir otros operadores si está vacío o solo hay un "-"
+        // no permite otros operadores si esta vacio o solo hay un -
         if (fullOp === '' || fullOp === '-') return;
 
-        // Reemplazar operador si se presiona uno nuevo consecutivamente
+        // reemplaza operador si se presiona uno nuevo consecutivamente
         if (operators.includes(fullOp[fullOp.length - 1])) {
             fullOp = fullOp.slice(0, -1) + value;
             screen().textContent = toDisplay(fullOp);
@@ -64,31 +64,31 @@ const handleClick = (value) => {
 }
 
 const calculate = () => {
-    // Evitar calcular si está vacío o termina en operador
+    // evita calcular si esta vacío o termina en operador
     if (fullOp === '' || operators.includes(fullOp.slice(-1))) return;
 
     try {
-        // Reemplazo de potencia y evaluación con jerarquía real
+        // reemplazo de potencia con jerarquia correcta usando ** para que funcione con eval
         const expression = fullOp.replace(/\^/g, '**');
         
-        // Evaluamos la expresión respetando orden matemático (* y / antes que + y -)
+        // evalua la expresion respetando jerarquia de operaciones
         let res = new Function(`return ${expression}`)();
 
         if (typeof res === 'number') {
-            res = Number(res.toPrecision(12)) / 1; // Limpieza de decimales flotantes
+            res = Number(res.toPrecision(12)) / 1; // limita a 12 digitos significativos para evitar problemas con decimales largos
         }
 
         const displayExpr = toDisplay(fullOp);
         
-        // Actualizar UI
+        // actualiza UI
         operacion().textContent = displayExpr + ' =';
         screen().textContent = res;
 
-        // Guardar en Historial
+        // guarda en Historial
         historial.push({ op: displayExpr, res });
         renderHistorial();
         
-        // Preparar para la siguiente acción
+        // prepara para la siguiente acción
         fullOp = String(res);
         isResult = true; 
     } catch (e) {
