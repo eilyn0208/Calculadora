@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALC - Kinetic Monolith</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="calc-container">
+            <header class="calc-header">
+                <h1>CALC</h1>
+            </header>
+
+            <div class="main-screen">
+                <span id="operacion" class="op-display"></span>
+                <span id="screen" class="res-display">0</span>
+            </div>
+
+            <div class="numeral">
+                <div class="btn-row">
+                    <button class="btn btn-util" onclick="handleClick('ac')">AC</button>
+                    <button class="btn btn-util" onclick="handleClick('del')">DEL</button>
+                    <button class="btn btn-func" onclick="handleClick('^')">^</button>
+                    <button class="btn btn-func" onclick="handleClick('/')">÷</button>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn" onclick="handleClick(7)">7</button>
+                    <button class="btn" onclick="handleClick(8)">8</button>
+                    <button class="btn" onclick="handleClick(9)">9</button>
+                    <button class="btn btn-func" onclick="handleClick('*')">×</button>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn" onclick="handleClick(4)">4</button>
+                    <button class="btn" onclick="handleClick(5)">5</button>
+                    <button class="btn" onclick="handleClick(6)">6</button>
+                    <button class="btn btn-func" onclick="handleClick('-')">-</button>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn" onclick="handleClick(1)">1</button>
+                    <button class="btn" onclick="handleClick(2)">2</button>
+                    <button class="btn" onclick="handleClick(3)">3</button>
+                    <button class="btn btn-func" onclick="handleClick('+')">+</button>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-cero" onclick="handleClick(0)">0</button>
+                    <button class="btn" onclick="handleClick('.')">.</button>
+                    <button class="btn btn-func btn-igual" onclick="calculate()">=</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="historial-container">
+            <div class="historial-header-section">
+                <div>
+                    <span class="archive-label">ARCHIVE</span>
+                    <h2 class="history-title">History</h2>
+                </div>
+                <button class="btn-clear-all" onclick="clearHistorial()">Clear All</button>
+            </div>
+            
+            <div id="historial-list" class="historial-list kinetic-scroll">
+                <p class="historial-empty">Sin cálculos aún.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

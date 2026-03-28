@@ -1,0 +1,202 @@
+:root {
+    --background: #0e0e0e;
+    --surface-low: #131313;
+    --surface-btn: #262626;
+    --surface-bright: #2c2c2c;
+    --primary: #ff9157;
+    --on-surface: #ffffff;
+    --on-surface-variant: #adaaaa;
+    --font-headline: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.wrapper {
+    display: flex;
+    gap: 60px;
+    max-width: 1000px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* --- CALCULADORA --- */
+.calc-container {
+    background-color: var(--surface-low);
+    padding: 32px;
+    border-radius: 24px;
+    width: 380px;
+    flex-shrink: 0;
+}
+
+.calc-header h1 {
+    color: var(--primary);
+    font-family: var(--font-headline);
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+}
+
+.main-screen {
+    text-align: right;
+    margin-bottom: 30px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.op-display {
+    color: var(--on-surface-variant);
+    font-size: 1.2rem;
+    font-family: var(--font-headline);
+    margin-bottom: 8px;
+}
+
+.res-display {
+    font-size: 4rem;
+    font-family: var(--font-headline);
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.btn-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.btn {
+    background-color: var(--surface-btn);
+    border: none;
+    color: var(--on-surface);
+    font-family: var(--font-headline);
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 22px 0;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover { background-color: var(--surface-bright); }
+.btn:active { transform: scale(0.95); }
+
+.btn-util { background-color: var(--surface-bright); }
+
+.btn-func {
+    background: linear-gradient(135deg, var(--primary), #f46800);
+    color: #401600;
+}
+
+.btn-cero { grid-column: span 2; }
+
+/* --- HISTORIAL KINETIC --- */
+.historial-container {
+    flex: 1;
+}
+
+.historial-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 32px;
+}
+
+.archive-label {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-family: var(--font-headline);
+}
+
+.history-title {
+    font-family: var(--font-headline);
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -3px;
+}
+
+.btn-clear-all {
+    background-color: var(--surface-btn);
+    color: var(--on-surface-variant);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.historial-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.historial-item {
+    background-color: var(--surface-low);
+    padding: 20px 30px;
+    border-radius: 100px; /* Forma de cápsula */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.historial-item:hover {
+    border-color: rgba(255, 145, 87, 0.3);
+    transform: translateX(8px);
+}
+
+.historial-item .op {
+    color: var(--on-surface-variant);
+    font-family: var(--font-headline);
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.res-container {
+    background-color: var(--surface-bright);
+    padding: 6px 20px;
+    border-radius: 100px;
+}
+
+.historial-item .res {
+    color: var(--primary);
+    font-family: var(--font-headline);
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+
+.historial-empty {
+    color: var(--on-surface-variant);
+    margin-top: 40px;
+    opacity: 0.5;
+}
+
+/* Ocultar scrollbar */
+.kinetic-scroll {
+    overflow-y: auto;
+    max-height: 70vh;
+    scrollbar-width: none;
+}
+.kinetic-scroll::-webkit-scrollbar { display: none; }
